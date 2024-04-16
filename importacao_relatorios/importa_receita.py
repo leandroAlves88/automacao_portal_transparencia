@@ -5,7 +5,7 @@ import csv
 import time
 
 arquivo = ""
-diretorio_temp = Path(__file__).resolve().parent / "dir_download/receitas"
+diretorio_temp = Path(__file__).resolve().parent.parent / "dir_download/receitas"
 
 # Verifique se a pasta existe
 if diretorio_temp.is_dir():
