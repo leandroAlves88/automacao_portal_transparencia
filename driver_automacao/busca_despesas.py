@@ -9,12 +9,12 @@ from pathlib import Path
 import time
 
 
-diretorio_temp = Path(__file__).resolve().parent
+diretorio_temp = Path(__file__).resolve().parent.parent / "dir_download/despesas/"
 print(f"{diretorio_temp}")
 chrome_options = Options()
 
 preferences = {
-    "download.default_directory": diretorio_temp,
+    "download.default_directory": f"{diretorio_temp}",
     "download.prompt_for_download": False,
     "directory_upgrade": True,
     "safebrowsing.enabled": True,
@@ -23,7 +23,7 @@ preferences = {
 chrome_options.add_experimental_option("prefs", preferences)
 
 servico = Service(ChromeDriverManager().install())
-navegador = webdriver.Chrome(service=servico)
+navegador = webdriver.Chrome(service=servico, options=chrome_options)
 navegador.maximize_window()
 __URL = "https://servicos.santanadeparnaiba.sp.gov.br/cecam_transparencia/Pages/Geral/wfDespesa.aspx"
 __XPATH_CAMPO_DT_INICIAL = '//*[@id="cphConteudo_rpnCadastro_detInicial_I"]'
@@ -105,3 +105,6 @@ def start_busca_relatorio_despesas():
     clica(navegador, By.XPATH, __XPATH_BTN_EXPORTA_CSV)
     time.sleep(20)
     print("---Fim da busca do relatorio de despesa---")
+
+
+start_busca_relatorio_despesas()

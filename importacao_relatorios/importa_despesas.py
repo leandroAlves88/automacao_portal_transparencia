@@ -18,8 +18,8 @@ def importa_pandas():
     print(f"Diretorio arquivo: {diretorio_temp}")
 
     # Diretorio arquivo para importacao
-    arquivo = f"{diretorio_temp}\Despesas.csv"
-    df = pd.read_csv(arquivo, encoding="ISO-8859-1", sep=";")
+    arquivo_despesas = f"{diretorio_temp}\Despesas.csv"
+    df = pd.read_csv(arquivo_despesas, encoding="ISO-8859-1", sep=";")
     df = tratamento_dados(df)
     print(df)
 
