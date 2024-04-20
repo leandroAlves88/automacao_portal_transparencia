@@ -13,48 +13,45 @@ if diretorio_temp.is_dir():
         print("Arquivo: ", arquivo)
 
 
-def importa_pandas():
+def gera_dataframe(dados, cabecalho):
 
-    print(f"Diretorio arquivo: {diretorio_temp}")
-
-    # Diretorio arquivo para importacao
-    arquivo_despesas = f"{diretorio_temp}\Despesas.csv"
-    df = pd.read_csv(arquivo_despesas, encoding="ISO-8859-1", sep=";")
-    df = tratamento_dados(df)
-    print(df)
+    df = pd.DataFrame(dados, columns=[cabecalho])
+    df.head()
+    return df
 
 
 def importa_csv():
     print("Importando arquivo")
     time.sleep(3)
     with open(f"{arquivo}", "r", encoding="ISO-8859-1") as csvfile:
-        reader = csv.reader(csvfile, delimiter=",")
-        for row in reader:
-            print(row)
+        reader = csv.reader(csvfile, delimiter=";")
+        dados = list(reader)
+
+    print("\n\nDeletando Cabeçalho")
+    del dados[0:6]
+
+    print("\n\nPrintando dados")
+    for row in range(0, 10):
+        print(f"{row} - {dados[row]}")
+
+    dados_padronizados = tratamento_dados(gera_dataframe(dados[1::], dados[0]))
+    grava_banco(dados_padronizados)
     print("arquivo Importado com sucesso")
 
 
-def grava_banco():
+def grava_banco(dados):
     print("Gravando no banco de dados")
-    print("...")
+    print(dados)
     time.sleep(3)
 
 
 def tratamento_dados(datafame):
     print("Limpeza e padronização dos dados")
     df = datafame
-    df = df.drop(df.index[:6])
-    df.head()
-    # time.sleep(2)
-    # df = df.drop(columns=[2])
-    # df.iat[0, 1] = "Data"
-    # novas_colunas = df.iloc[0]
-    # df.columns = novas_colunas
-    # df = df.drop(df.index[:1])
+    df = df.drop(columns=["Data"])
+    df = df.rename(columns={"": "Data"})
     print(f"Tamanho dos dados: {df.shape}")
     return df
 
 
-importa_pandas()
-# importa_csv()
-grava_banco()
+importa_csv()
