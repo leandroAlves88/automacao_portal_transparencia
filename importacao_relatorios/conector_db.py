@@ -1,7 +1,16 @@
+"""
+Conexão com o banco de dados
+
+funcoes:
+    cria_conexao
+    fecha_conexao
+
+"""
+
+import configparser
+from pathlib import Path
 import mysql.connector
 from mysql.connector import errorcode
-from pathlib import Path
-import configparser
 
 diretorio_config = Path(__file__).resolve().parent.parent / "documentos/"
 
@@ -18,7 +27,7 @@ config = {
 
 
 def cria_conexao():
-
+    """Função para uma conexão com o banco de dados MySQL"""
     try:
         conn = mysql.connector.connect(**config)
         print("Conexão ao banco de dados MySQL bem-sucedida.")
@@ -34,12 +43,13 @@ def cria_conexao():
 
 
 def fecha_conexao(conn, conexao):
+    """Função para fechar a conexão do banco"""
     conn.close()
     conexao.close()
 
 
 def insere_dados(registros, tipo_relatorio):
-    # insert
+    """Função para inserir registros no banco de dados - # insert"""
     conexao = cria_conexao()
     cursor = conexao.cursor()
     if "teste" in tipo_relatorio:
@@ -55,24 +65,41 @@ def insere_dados(registros, tipo_relatorio):
         conexao.commit()
 
     fecha_conexao(cursor, conexao)
-    return
 
 
-def busca_dados(cursor):
-    # select
-    dados_consulta = ()
-    cursor.execute("SELECT * FROM TESTE")
+def busca_dados(tipo_relatorio):
+    """Função para buscar registros no banco de dados - # select"""
+
+    dados_consulta = []
+
+    conexao = cria_conexao()
+    cursor = conexao.cursor()
+    if "teste" in tipo_relatorio:
+        cursor.execute("SELECT * FROM TESTE")
+        for row in cursor.fetchall():
+            dados_consulta.append(row)
+
     return dados_consulta
 
 
 def atualiza_dados():
-    # update
+    """# update"""
     return
 
 
-dados = [7, "teste 5"]
-operacao = "teste"
-insere_dados(dados, operacao)
+def teste():
+    """Metodo para teste de insert no banco"""
+    dados = [7, "teste 5"]
+    operacao = "teste"
+    insere_dados(dados, operacao)
+
+
+"""
+resultado_teste = busca_dados("teste")
+for i in range(len(resultado_teste)):
+    print(resultado_teste[i])
+"""
+
 # Ler e exibir os resultados
 # for row in cursor.fetchall():
 #    print(row)
