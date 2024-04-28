@@ -16,15 +16,21 @@ def insere_dados(registros, tipo_relatorio):
         conexao = conector.cria_conexao()
         cursor = conexao.cursor()
 
-        if "despesas" in tipo_relatorio:
-            print("Inserindo Registro de despesas")
-            print("Registros:\n", registros)
-            query = "INSERT INTO DB_PC.despesas (Empenho, Data_Despesa , CPFCNPJ , CredorFornecedor , Descricao , Mod_Lic , Licitacao, Empenhado , Liquidado , Pago) VALUES (%s,STR_TO_DATE( %s, '%m/%d/%Y' ),%s,%s,%s,%s,%s,%s,%s,%s)"
-            cursor.execute(query, registros)
-            conexao.commit()
-        conector.fecha_conexao(cursor, conexao)
+        data_list = registros.to_records(index=False).tolist()
+        print("Gravando registro(s) no banco de dados")
+        for row in data_list:
+            if "despesas" in tipo_relatorio:
+                print("Inserindo Registro de despesas")
+                print("Registros:\n", row)
+                query = "INSERT INTO DB_PC.despesas (Empenho, Data_Despesa , CPFCNPJ , CredorFornecedor , Descricao , Mod_Lic , Licitacao, Empenhado , Liquidado , Pago) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                cursor.execute(query, row)
+        conexao.commit()
+        return True
 
-    except:
+    except Exception as e:
+        print(f"Erro ao Gravar Registro: {e}")
+        return False
+    finally:
         conector.fecha_conexao(cursor, conexao)
 
 
