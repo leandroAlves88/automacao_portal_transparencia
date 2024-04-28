@@ -1,1 +1,1 @@
-INSERT INTO DB_PC.despesas (Empenho, Data , CPFCNPJ , CredorFornecedor , Descricao , Mod_Lic , Licitacao, Empenhado , Liquidado , Pago)
+del dados[0:-1]
