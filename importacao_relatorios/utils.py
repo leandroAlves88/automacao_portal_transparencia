@@ -9,8 +9,7 @@ def converte_decimal(dados):
     for row in data_list:
         string_decimal_brasileiro = str(row[0])
         string_sem_ponto_e_virgula = string_decimal_brasileiro.replace(".", "").replace(
-            ",", ""
-        )
+            ",", "").replace("R$ ", "")
         string_com_ponto_decimal = (
             string_sem_ponto_e_virgula[:-2] + "." + string_sem_ponto_e_virgula[-2:]
         )
@@ -46,6 +45,6 @@ def formata_data(dados):
         # print("Data Convertida: ", data_formatada)
         nova_data_list.append(data_formatada)
 
-    print("Tabulacao Removida")
-    print("Tabulacao Removida: ", data_list)
+    # print("Tabulacao Removida")
+    # print("Tabulacao Removida: ", data_list)
     return nova_data_list
