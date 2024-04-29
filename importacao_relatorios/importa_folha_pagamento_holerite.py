@@ -4,9 +4,11 @@ import csv
 import operacoes_db as operacoes
 import utils
 
-TIPO_RELATORIO = "despesas"
+TIPO_RELATORIO = "holerite"
 
-diretorio_temp = Path(__file__).resolve().parent.parent / "dir_download/despesas/"
+diretorio_temp = (
+    Path(__file__).resolve().parent.parent / "dir_download/folha_pagamento/holerite/"
+)
 
 # Verifique se a pasta existe
 if diretorio_temp.is_dir():
@@ -44,18 +46,14 @@ def grava_banco(dados):
 def tratamento_dados(datafame):
     print("Limpeza e padronização dos dados")
     df = datafame
-    df = df.drop("Data", axis=1, level=0)
+    df = df.drop("", axis=1, level=0)
     df = df.drop(df.index[-1])
-    df = df.rename(columns={"": "Data"})
-    df["Data"] = utils.formata_data(df["Data"])
-    df["CPF/CNPJ"] = utils.remove_tabulacao(df["CPF/CNPJ"])
-    df["Descrição"] = utils.remove_tabulacao(df["Descrição"])
-    df["Mod. Lic."] = utils.remove_tabulacao(df["Mod. Lic."])
-    df["Credor/Fornecedor"] = utils.remove_tabulacao(df["Credor/Fornecedor"])
-    df["Empenhado"] = utils.converte_decimal(df["Empenhado"])
-    df["Liquidado"] = utils.converte_decimal(df["Liquidado"])
-    df["Pago"] = utils.converte_decimal(df["Pago"])
+    df["Data Admissão"] = utils.formata_data(df["Data Admissão"])
+    df["Valor Base"] = utils.converte_decimal(df["Valor Base"])
+    df["Valor Bruto"] = utils.converte_decimal(df["Valor Bruto"])
+    df["Vlr. Adiant."] = utils.converte_decimal(df["Vlr. Adiant."])
+    df["Vlr Líquido"] = utils.converte_decimal(df["Vlr Líquido"])
     return df
 
 
-# importa_csv()
+importa_csv()
