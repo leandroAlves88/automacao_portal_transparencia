@@ -28,7 +28,7 @@ def insere_dados(registros, tipo_relatorio):
             if "folha_pagamento" in tipo_relatorio:
                 print("Inserindo Registro de folha de pagamento")
                 print("Registros:\n", row)
-                query = "INSERT INTO DB_PC.folha_pagamento (Nome_funcionario, Data_Admissao , Departamento, Cargo_Funcao , Salario_Base) VALUES (%s,%s,%s,%s,%s)"
+                query = "INSERT INTO DB_PC.folha_pagamento (Nome_funcionario, Data_Admissao , Departamento, Cargo_Funcao , Salario_Base, Sexo) VALUES (%s,%s,%s,%s,%s,%s)"
                 cursor.execute(query, row)
 
             if "holerite" in tipo_relatorio:

@@ -49,6 +49,7 @@ def tratamento_dados(datafame):
     df = df.drop(df.index[-1])
     df["Data de Admissão"] = utils.formata_data(df["Data de Admissão"])
     df["Valor Base"] = utils.converte_decimal(df["Valor Base"])
+    df["Sexo"] = utils.validacao_genero(df["Nome"])
     print(datafame)
 
     return df
