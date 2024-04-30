@@ -10,7 +10,7 @@ import time
 
 
 diretorio_temp = (
-    Path(__file__).resolve().parent.parent / "dir_download/folha_pagamento/"
+    Path(__file__).resolve().parent.parent / "dir_download/folha_pagamento/folha/"
 )
 print(f"{diretorio_temp}")
 chrome_options = Options()
@@ -28,8 +28,21 @@ servico = Service(ChromeDriverManager().install())
 navegador = webdriver.Chrome(service=servico, options=chrome_options)
 navegador.maximize_window()
 __URL = "https://servicos.santanadeparnaiba.sp.gov.br/cecam_transparencia/Pages/Geral/wfFolhaPagamentoServidor.aspx"
-__XPATH_CAMPO_DT_INICIAL = '//*[@id="cphConteudo_rpnCadastro_detInicial_I"]'
-__XPATH_CAMPO_DT_FINAL = '//*[@id="cphConteudo_rpnCadastro_detFinal_I"]'
+__XPATH_CAMPO_EXERCICIO = '//*[@id="cphConteudo_rpnCadastro_cbxExercicio_I"]'
+__XPATH_CAMPO_PERIODO = '//*[@id="cphConteudo_rpnCadastro_cbxMes_I"]'
+__XPATH_CAMPO_DEPARTAMENTO = '//*[@id="cphConteudo_rpnCadastro_cbxDepartamento_I"]'
+__XPATH_EXERCICIO_2024 = '//*[@id="cphConteudo_rpnCadastro_cbxExercicio_DDD_L_LBI0T0"]'
+__XPATH_EXERCICIO_2023 = '//*[@id="cphConteudo_rpnCadastro_cbxExercicio_DDD_L_LBI1T0"]'
+"""
+__XPATH_PERIODO_JANEIRO = 
+__XPATH_PERIODO_FEVEREIRO = 
+__XPATH_PERIODO_MARCO = 
+__XPATH_PERIODO_ABRIL = 
+__XPATH_PERIODO_MAIO = 
+__XPATH_PERIODO_JULHO = 
+
+__XPATH_DEPARTAMENTO_TODOS = 
+"""
 __XPATH_BTN_PESQUISAR = '//*[@id="cphConteudo_btnPesquisarImg"]'
 __XPATH_BTN_EXPORTAR = '//div[@title="Exportar"]'
 __XPATH_BTN_EXPORTA_CSV = (
@@ -86,27 +99,23 @@ def escreve(driver, by, elemento, texto):
     print(f"Escrevendo texto {texto} no elemento: {elemento}")
 
 
-def start_busca_relatorio_despesas():
+def start_busca_relatorio():
     print("---Iniciando busca do relatorio de despesa---")
     navegador.get(__URL)
     time.sleep(3)
-
-    limpa_campo(navegador, By.XPATH, __XPATH_CAMPO_DT_INICIAL)
-    escreve(navegador, By.XPATH, __XPATH_CAMPO_DT_INICIAL, "01/01/2024")
-
-    # WebDriverWait.until(ExpectedCondition())
-    limpa_campo(navegador, By.XPATH, __XPATH_CAMPO_DT_FINAL)
-    escreve(navegador, By.XPATH, __XPATH_CAMPO_DT_FINAL, "31/01/2024")
-
-    clica(navegador, By.XPATH, __XPATH_BTN_PESQUISAR)
-
-    clica(navegador, By.XPATH, __XPATH_BTN_EXPORTAR)
-
-    clica_tela_bloqueio(navegador, By.XPATH, __XPATH_BLOQ_TELA)
-
-    clica(navegador, By.XPATH, __XPATH_BTN_EXPORTA_CSV)
-    time.sleep(20)
+    clica(navegador, By.XPATH, __XPATH_CAMPO_EXERCICIO)
+    time.sleep(5)
+    clica(navegador, By.XPATH, __XPATH_CAMPO_EXERCICIO)
+    time.sleep(5)
+    clica(navegador, By.XPATH, __XPATH_CAMPO_PERIODO)
+    time.sleep(5)
+    clica(navegador, By.XPATH, __XPATH_CAMPO_PERIODO)
+    time.sleep(5)
+    clica(navegador, By.XPATH, __XPATH_CAMPO_DEPARTAMENTO)
+    time.sleep(5)
+    clica(navegador, By.XPATH, __XPATH_CAMPO_DEPARTAMENTO)
+    time.sleep(5)
     print("---Fim da busca do relatorio de despesa---")
 
 
-start_busca_relatorio_despesas()
+start_busca_relatorio()
