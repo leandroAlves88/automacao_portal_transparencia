@@ -75,7 +75,7 @@ primary key(id_cargo),
 FOREIGN KEY (id_departamento) REFERENCES Cad_Departamento(id_departamento)
 );
 
-create table Cad_Funcionadio (
+create table Cad_Funcionario (
 id_Funcionario int not null auto_increment, 
 nome_funcionario varchar(200),
 id_cargo int,
