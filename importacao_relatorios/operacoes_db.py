@@ -19,6 +19,12 @@ def insere_dados(registros, tipo_relatorio):
         data_list = registros.to_records(index=False).tolist()
         print("Gravando registro(s) no banco de dados")
         for row in data_list:
+            if "receita" in tipo_relatorio:
+                print("Inserindo Registro de despesas")
+                print("Registros:\n", row)
+                query = "INSERT INTO DB_PC.TB_RECEITA(Ano,Data_receita,Ficha_Receita,Conta_Contabil,Descricao,Codigo_DR,Descricao_DR,Orcado,Lancado,Arrecadado) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                cursor.execute(query, row)
+
             if "despesas" in tipo_relatorio:
                 print("Inserindo Registro de despesas")
                 print("Registros:\n", row)
