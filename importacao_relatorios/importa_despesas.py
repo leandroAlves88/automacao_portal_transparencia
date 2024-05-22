@@ -23,7 +23,7 @@ def gera_dataframe(dados, cabecalho):
 
 
 def importa_csv():
-    print("Importando arquivo")
+    print("Importando arquivo de despesa")
     with open(f"{dir_arquivo}", "r", encoding="ISO-8859-1") as csvfile:
         reader = csv.reader(csvfile, delimiter=";")
         dados = list(reader)
