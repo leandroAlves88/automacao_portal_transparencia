@@ -67,7 +67,7 @@ def start_busca_relatorio_receitas():
 
     # WebDriverWait.until(ExpectedCondition())
     limpa_campo(navegador, By.XPATH, __XPATH_CAMPO_DT_FINAL)
-    escreve(navegador, By.XPATH, __XPATH_CAMPO_DT_FINAL, "31/01/2024")
+    escreve(navegador, By.XPATH, __XPATH_CAMPO_DT_FINAL, "30/04/2024")
 
     clica(navegador, By.XPATH, __XPATH_BTN_PESQUISAR)
 

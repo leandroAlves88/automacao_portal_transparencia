@@ -55,4 +55,4 @@ def tratamento_dados(datafame):
     return df
 
 
-importa_csv()
+# importa_csv()

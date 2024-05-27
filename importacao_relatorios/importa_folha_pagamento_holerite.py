@@ -49,9 +49,9 @@ def tratamento_dados(datafame):
     df = df.drop("", axis=1, level=0)
     df = df.drop(df.index[-1])
     df["Data Admissão"] = utils.formata_data(df["Data Admissão"])
-    df["Valor Base"] = utils.converte_decimal(df["Valor Base"])
-    df["Valor Bruto"] = utils.converte_decimal(df["Valor Bruto"])
-    df["Vlr. Adiant."] = utils.converte_decimal(df["Vlr. Adiant."])
+    df["Vlr Base"] = utils.converte_decimal(df["Vlr Base"])
+    df["Vlr Bruto"] = utils.converte_decimal(df["Vlr Bruto"])
+    df["Vlr Adiant."] = utils.converte_decimal(df["Vlr Adiant."])
     df["Vlr Líquido"] = utils.converte_decimal(df["Vlr Líquido"])
     return df
 
