@@ -99,8 +99,8 @@ def escreve(driver, by, elemento, texto):
     print(f"Escrevendo texto {texto} no elemento: {elemento}")
 
 
-def start_busca_relatorio():
-    print("---Iniciando busca do relatorio de despesa---")
+def start_busca_relatorio_folha_pagamento():
+    print("---Iniciando busca do relatorio folha de pagamento---")
     navegador.get(__URL)
     time.sleep(3)
     clica(navegador, By.XPATH, __XPATH_CAMPO_EXERCICIO)
@@ -116,6 +116,3 @@ def start_busca_relatorio():
     clica(navegador, By.XPATH, __XPATH_CAMPO_DEPARTAMENTO)
     time.sleep(5)
     print("---Fim da busca do relatorio de despesa---")
-
-
-start_busca_relatorio()

@@ -1,6 +1,21 @@
 from driver_automacao import busca_despesas
+from driver_automacao import busca_recitas
+from driver_automacao import busca_folha_pagamento
+from driver_automacao import busca_folha_pagamento_holerite
 from importacao_relatorios import importa_despesas
+from importacao_relatorios import importa_receita
+from importacao_relatorios import importa_folha_pagamento
+from importacao_relatorios import importa_folha_pagamento_holerite
+
 
 busca_despesas.start_busca_relatorio_despesas()
 importa_despesas.importa_csv()
-# importa_despesas.grava_banco()
+
+busca_recitas.start_busca_relatorio_receitas()
+importa_receita.importa_csv()
+
+busca_folha_pagamento.start_busca_relatorio_folha_pagamento()
+importa_folha_pagamento.importa_csv()
+
+busca_folha_pagamento_holerite.start_busca_relatorio_holerite()
+importa_folha_pagamento_holerite.importa_csv()

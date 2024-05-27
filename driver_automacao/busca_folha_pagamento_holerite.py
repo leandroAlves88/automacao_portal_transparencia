@@ -86,8 +86,8 @@ def escreve(driver, by, elemento, texto):
     print(f"Escrevendo texto {texto} no elemento: {elemento}")
 
 
-def start_busca_relatorio():
-    print("---Iniciando busca do relatorio de despesa---")
+def start_busca_relatorio_holerite():
+    print("---Iniciando busca do relatorio holerite---")
     navegador.get(__URL)
     time.sleep(3)
 
@@ -107,6 +107,3 @@ def start_busca_relatorio():
     clica(navegador, By.XPATH, __XPATH_BTN_EXPORTA_CSV)
     time.sleep(20)
     print("---Fim da busca do relatorio de despesa---")
-
-
-start_busca_relatorio()

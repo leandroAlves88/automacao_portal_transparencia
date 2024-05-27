@@ -20,7 +20,7 @@ def insere_dados(registros, tipo_relatorio):
         print("Gravando registro(s) no banco de dados")
         for row in data_list:
             if "receita" in tipo_relatorio:
-                print("Inserindo Registro de despesas")
+                print("Inserindo Registro de Receita")
                 print("Registros:\n", row)
                 query = "INSERT INTO DB_PC.TB_RECEITA(Ano,Data_receita,Ficha_Receita,Conta_Contabil,Descricao,Codigo_DR,Descricao_DR,Orcado,Lancado,Arrecadado) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                 cursor.execute(query, row)
@@ -28,7 +28,7 @@ def insere_dados(registros, tipo_relatorio):
             if "despesas" in tipo_relatorio:
                 print("Inserindo Registro de despesas")
                 print("Registros:\n", row)
-                query = "INSERT INTO DB_PC.despesas (Empenho, Data_Despesa , CPFCNPJ , CredorFornecedor , Descricao , Mod_Lic , Licitacao, Empenhado , Liquidado , Pago) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
+                query = "INSERT INTO DB_PC.tb_despesas (Empenho, Data_Despesa , CPFCNPJ , CredorFornecedor , Descricao , Mod_Lic , Licitacao, Empenhado , Liquidado , Pago,Tipo_Receita) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                 cursor.execute(query, row)
 
             if "folha_pagamento" in tipo_relatorio:
@@ -38,9 +38,9 @@ def insere_dados(registros, tipo_relatorio):
                 cursor.execute(query, row)
 
             if "holerite" in tipo_relatorio:
-                print("Inserindo Registro de folha de pagamento")
+                print("Inserindo Registro de Holerite")
                 print("Registros:\n", row)
-                query = "INSERT INTO DB_PC.folha_pagamento_holerite (Codigo_funcionario, Data_Admissao , Departamento, Cargo_Funcao , Salario_Base, Salario_Bruto, Vlr_Adiant, Vlr_Liquido) VALUES (%s,%s,%s,%s,%s,%s,%s,%s)"
+                query = "INSERT INTO DB_PC.folha_pagamento_holerite (Nome_funcionario, Data_Admissao , Departamento, Cargo_Funcao ,Nivel_Salarial, Salario_Base, Salario_Bruto, Vlr_Adiant, Vlr_Liquido,Mes, Ano) VALUES (%s,%s,%s,%s,%s,%s,%s,%s,%s,%s,%s)"
                 cursor.execute(query, row)
 
         conexao.commit()
